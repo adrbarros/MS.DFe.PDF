@@ -4,7 +4,44 @@ using DFe.Classes.Flags;
 using MS.DFe.PDF;
 using MS.DFe.PDF.Modelos;
 using NFe.Classes;
-using QuestPDF.Fluent;
+
+// abaixo exemplo de chamada para impressão da CC-e
+/*
+var _output = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
+var _cce = new CCeLeiaute(
+    new CCeDados(
+        new CCeDadosNota(
+            "NOME DA EMPRESA TESTE LTDA",
+            "00000000000000",
+            "55 - NF-e",
+            1,
+            1,
+            "12341234123412341234123412341234123412341234"
+        ),
+        "12323021392399",
+        EAmbiente.HOMOLOGACAO,
+        DateTimeOffset.Now,
+        DateTimeOffset.Now,
+        new string[]
+        {
+            "Produto 1 Alterado de X para Y. Produto 1 Alterado de X para Y. Produto 1 Alterado de X para Y. Produto 1 Alterado de X para Y. Produto 1 Alterado de X para Y.",
+            "Produto 1 Alterado de X para Z",
+            "Produto 1 Alterado de X para Z",
+            "Produto 1 Alterado de X para Z",
+            "Produto 1 Alterado de X para Z",
+            "Produto 1 Alterado de X para Z",
+            "Produto 1 Alterado de X para Z"
+        }
+    ),
+    null // logo
+);
+
+var _pdf = _cce.Gerar();
+
+var _file = Path.Combine(_output, $"cce-{DateTime.Now.ToString("yyyyMMdd")}.pdf");
+
+File.WriteAllBytes(_file, _pdf);
+*/
 
 string? _xml = null;
 while (string.IsNullOrEmpty(_xml))
@@ -86,7 +123,7 @@ var _nfce = new NFCeLeiaute(
     )
 );
 
-var _pdf = _nfce.GeneratePdf();
+var _pdf = _nfce.Gerar();
 
 var _fileInfo = new FileInfo(_xml);
 var _novoNome = $"{_fileInfo.Name}_{DateTime.Now.ToString("yyyyMMdd")}.pdf";
